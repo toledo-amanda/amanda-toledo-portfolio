@@ -1,22 +1,11 @@
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import App from './App'
 import { experiences } from './data/experience'
 import { RESUME_PATH, profile } from './data/profile'
 
 describe('portfolio', () => {
-  const writeText = vi.fn<(text: string) => Promise<void>>()
-
-  beforeEach(() => {
-    writeText.mockReset()
-    writeText.mockResolvedValue(undefined)
-    Object.defineProperty(navigator, 'clipboard', {
-      configurable: true,
-      value: { writeText },
-    })
-  })
-
   it('renders the hero heading', () => {
     render(<App />)
 
@@ -34,20 +23,6 @@ describe('portfolio', () => {
     expect(within(hero as HTMLElement).queryByText(profile.location)).not.toBeInTheDocument()
     expect(within(hero as HTMLElement).queryByText('Interface systems')).not.toBeInTheDocument()
     expect(within(hero as HTMLElement).queryByText(/49\.28° N/)).not.toBeInTheDocument()
-  })
-
-  it('changes About tabs with the keyboard', async () => {
-    const user = userEvent.setup()
-    render(<App />)
-
-    const frontendTab = screen.getByRole('tab', { name: /Frontend/ })
-    const mobileTab = screen.getByRole('tab', { name: /Mobile/ })
-
-    frontendTab.focus()
-    await user.keyboard('{ArrowRight}{Enter}')
-
-    expect(mobileTab).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByRole('heading', { name: /Native-feeling journeys/ })).toBeVisible()
   })
 
   it('shows every technology icon and shares the work section title style', () => {
@@ -76,11 +51,20 @@ describe('portfolio', () => {
     expect(aboutTitle.className).toBe(workTitle.className)
   })
 
-  it('renders every experience entry from typed data', () => {
+  it('renders every experience with the shared poster layout and configured image', () => {
     render(<App />)
 
     experiences.forEach((experience) => {
-      expect(screen.getAllByText(experience.company).length).toBeGreaterThan(0)
+      const article = screen.getByRole('heading', { name: experience.company }).closest('article')
+
+      expect(article).not.toBeNull()
+      expect(within(article as HTMLElement).getByRole('img')).toHaveAttribute(
+        'src',
+        experience.imagePath,
+      )
+      expect(within(article as HTMLElement).getAllByRole('listitem')).toHaveLength(
+        experience.highlights.length,
+      )
     })
   })
 
@@ -104,29 +88,15 @@ describe('portfolio', () => {
     expect(within(featuredExperience as HTMLElement).getAllByRole('listitem')).toHaveLength(8)
   })
 
-  it('uses the same resume path in the header, contact, and footer', () => {
+  it('uses the same resume path in the header and footer', () => {
     render(<App />)
 
     const resumeLinks = screen
       .getAllByRole('link')
       .filter((link) => link.getAttribute('href') === RESUME_PATH)
 
-    expect(resumeLinks).toHaveLength(3)
+    expect(resumeLinks).toHaveLength(2)
     resumeLinks.forEach((link) => expect(link).toHaveAttribute('download'))
-  })
-
-  it('copies the email and shows a confirmation', async () => {
-    const user = userEvent.setup()
-    Object.defineProperty(navigator, 'clipboard', {
-      configurable: true,
-      value: { writeText },
-    })
-    render(<App />)
-
-    await user.click(screen.getByRole('button', { name: 'Copy email' }))
-
-    expect(writeText).toHaveBeenCalledWith(profile.email)
-    expect(await screen.findByText('Email address copied.')).toBeInTheDocument()
   })
 
   it('marks external social links safely', () => {

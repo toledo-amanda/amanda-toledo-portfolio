@@ -7,6 +7,8 @@ export const experiences: readonly Experience[] = [
     number: '01',
     company: 'MB Labs',
     imagePath: '/images/travelex.jpg',
+    imageAlt: 'Glass office buildings representing the MB Labs experience',
+    posterDetails: ['Remote, Campinas — Brazil', 'Web, mobile & financial products'],
     role: 'Frontend Engineer (Web and Mobile)',
     period: '09/2023 - Present',
     narrative:
@@ -33,6 +35,8 @@ export const experiences: readonly Experience[] = [
     number: '02',
     company: 'Fretebras',
     imagePath: '/images/fretebras.jpg',
+    imageAlt: 'Freight truck on the road representing the Fretebras marketplace',
+    posterDetails: ['Freight marketplace products', 'Micro-frontends & design systems'],
     role: 'Frontend Engineer',
     period: 'Dates to confirm',
     narrative:
@@ -48,10 +52,12 @@ export const experiences: readonly Experience[] = [
     theme: 'light',
   },
   {
-    id: 'streaming-platform',
+    id: 'hirix',
     number: '03',
-    company: 'Streaming platform / Rede Bandeirantes',
+    company: 'Hirix',
     imagePath: '/images/hirix.jpg',
+    imageAlt: 'Television remote facing a streaming interface representing the Hirix experience',
+    posterDetails: ['Web & Smart TV products', 'Streaming & content discovery'],
     role: 'Frontend Engineer',
     period: 'Dates to confirm',
     narrative:

@@ -1,3 +1,7 @@
+.experienceList {
+  background: var(--color-background);
+}
+
 .section {
   min-height: 100svh;
   padding: calc(var(--header-height) + var(--section-padding)) var(--page-gutter)

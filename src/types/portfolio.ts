@@ -36,6 +36,8 @@ export interface Experience {
   number: string
   company: string
   imagePath: string
+  imageAlt: string
+  posterDetails: readonly [string, string]
   role: string
   period: string
   narrative: string
@@ -45,4 +47,4 @@ export interface Experience {
   theme: 'light' | 'dark'
 }
 
-export type NavigationSection = 'about' | 'experience' | 'contact'
+export type NavigationSection = 'about' | 'experience'
