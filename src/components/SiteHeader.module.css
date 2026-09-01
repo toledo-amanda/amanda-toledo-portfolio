@@ -1,0 +1,219 @@
+.header {
+  position: sticky;
+  z-index: var(--z-header);
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  min-height: var(--header-height);
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--page-gutter);
+  background: var(--color-background);
+}
+
+.desktopNav {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.navGroup {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3.5rem);
+}
+
+.desktopNav a {
+  position: relative;
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--color-graphite);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.desktopNav a::after {
+  position: absolute;
+  right: 0;
+  bottom: 0.3rem;
+  left: 0;
+  height: 1px;
+  background: var(--color-accent);
+  content: '';
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 240ms var(--ease-editorial);
+}
+
+.desktopNav a:hover::after,
+.desktopNav a[aria-current='page']::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.menuButton {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid var(--color-ink);
+  border-radius: 0;
+  background: transparent;
+  flex-direction: column;
+}
+
+.menuButton span {
+  display: block;
+  width: 1rem;
+  height: 1px;
+  background: var(--color-ink);
+}
+
+.drawerBackdrop {
+  position: fixed;
+  z-index: var(--z-drawer);
+  inset: 0;
+  background: rgb(17 17 22 / 64%);
+  opacity: calc(1 - var(--drawer-swipe-progress));
+  transition: opacity 450ms var(--ease-editorial);
+}
+
+.drawerBackdrop[data-starting-style],
+.drawerBackdrop[data-ending-style] {
+  opacity: 0;
+}
+
+.drawerViewport {
+  position: fixed;
+  z-index: calc(var(--z-drawer) + 1);
+  inset: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.drawerPopup {
+  width: min(26rem, calc(100vw - 2rem));
+  height: 100%;
+  border-left: 1px solid var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  outline: none;
+  overflow-y: auto;
+  transform: translateX(var(--drawer-swipe-movement-x));
+  transition: transform 450ms var(--ease-editorial);
+}
+
+.drawerPopup[data-starting-style],
+.drawerPopup[data-ending-style] {
+  transform: translateX(100%);
+}
+
+.drawerContent {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  padding: 1.25rem;
+}
+
+.drawerTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.drawerTitle {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.closeButton {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--color-ink);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-ink);
+}
+
+.closeButton svg {
+  width: 1.125rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+}
+
+.mobileNavLinks {
+  display: grid;
+  margin-top: clamp(3rem, 12vh, 7rem);
+}
+
+.mobileNavLinks a {
+  display: grid;
+  min-height: 4.5rem;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 8vw, 2.8rem);
+  font-weight: 400;
+  grid-template-columns: 2.25rem 1fr;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+.mobileNavLinks a[aria-current='page'] {
+  color: var(--color-accent);
+}
+
+.mobileNavLinks span {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0;
+}
+
+.drawerNote {
+  margin: auto 0 0;
+  padding-top: 3rem;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+@media (max-width: 47.99rem) {
+  .desktopNav {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawerBackdrop,
+  .drawerPopup {
+    transition-duration: 1ms;
+  }
+}

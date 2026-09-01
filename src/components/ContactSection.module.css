@@ -1,0 +1,222 @@
+.contact {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  justify-content: space-between;
+  padding: calc(var(--header-height) + var(--section-padding)) var(--page-gutter)
+    var(--section-padding);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  flex-direction: column;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.contact::before,
+.contact::after {
+  position: absolute;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  content: '';
+  pointer-events: none;
+}
+
+.contact::before {
+  right: -18vw;
+  bottom: -32vw;
+  width: 70vw;
+  aspect-ratio: 1;
+}
+
+.contact::after {
+  right: -10vw;
+  bottom: -24vw;
+  width: 54vw;
+  aspect-ratio: 1;
+}
+
+.contactTopline,
+.contactContent,
+.linkGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.contactTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-line);
+  gap: 1rem;
+}
+
+.contactTopline > span {
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.09em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.contactContent {
+  padding: clamp(3rem, 9vh, 8rem) 0;
+}
+
+.contact h2 {
+  max-width: 12em;
+  margin: 0;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7.8vw, 10rem);
+  font-weight: 400;
+  letter-spacing: -0.075em;
+  line-height: 0.84;
+  text-wrap: balance;
+}
+
+.contact h2 em {
+  color: var(--color-accent);
+  font-style: normal;
+}
+
+.contactActions {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  margin-top: clamp(2.5rem, 6vh, 5rem);
+  flex-wrap: wrap;
+}
+
+.emailLink,
+.copyButton {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.emailLink {
+  min-width: min(25rem, 100%);
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.emailLink svg,
+.copyButton svg {
+  width: 1.1rem;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.15;
+}
+
+.copyButton {
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.emailLink:hover,
+.copyButton:hover {
+  border-color: var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: inset 0 -3px var(--color-ink);
+}
+
+.linkGrid {
+  display: grid;
+  border-top: 1px solid var(--color-line);
+  border-left: 1px solid var(--color-line);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.linkGrid a {
+  display: flex;
+  min-height: 5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-right: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  gap: 1rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.linkGrid a:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: inset 0 -3px var(--color-ink);
+}
+
+.linkGrid svg {
+  width: 1.1rem;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.15;
+}
+
+@media (max-width: 47.99rem) {
+  .contact {
+    min-height: auto;
+    padding: calc(var(--header-height) + 4rem) 1rem 4rem;
+  }
+
+  .contactTopline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .contactTopline > span {
+    text-align: left;
+  }
+
+  .contact h2 {
+    font-size: clamp(3.4rem, 16vw, 6rem);
+  }
+
+  .contactActions,
+  .emailLink,
+  .copyButton {
+    width: 100%;
+  }
+
+  .emailLink {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .copyButton {
+    justify-content: space-between;
+  }
+
+  .linkGrid {
+    grid-template-columns: 1fr;
+  }
+
+}

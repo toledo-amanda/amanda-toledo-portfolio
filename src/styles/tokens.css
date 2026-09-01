@@ -1,0 +1,23 @@
+:root {
+  --color-background: rgb(255 255 255 / 82%);
+  --color-paper: rgb(255 255 255 / 92%);
+  --color-ink: #000;
+  --color-graphite: #000;
+  --color-muted: #000;
+  --color-line: rgb(0 0 0 / 35%);
+  --color-soft-line: rgb(0 0 0 / 12%);
+  --color-accent: #000;
+  --color-focus: #000;
+  --font-display: Figtree, sans-serif, arial, sans-serif;
+  --font-body: Figtree, sans-serif, arial, sans-serif;
+  --font-mono: Figtree, sans-serif, arial, sans-serif;
+  --header-height: 4.5rem;
+  --page-gutter: clamp(1rem, 3vw, 3rem);
+  --section-padding: clamp(2.5rem, 6vw, 6rem);
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --z-header: 30;
+  --z-progress: 80;
+  --z-drawer: 100;
+  --z-tooltip: 120;
+  --z-toast: 140;
+}

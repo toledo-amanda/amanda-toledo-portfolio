@@ -1,0 +1,225 @@
+.section {
+  min-height: 100svh;
+  padding: calc(var(--header-height) + var(--section-padding)) var(--page-gutter)
+    var(--section-padding);
+  background: rgb(255 255 255 / 82%);
+  color: #000;
+  scroll-snap-align: start;
+}
+
+.featured {
+  padding-top: clamp(2.5rem, 6vw, 6rem);
+}
+
+.experienceGrid {
+  display: grid;
+  align-items: start;
+  gap: clamp(2.5rem, 5vw, 6.5rem);
+  grid-template-columns: minmax(32rem, 0.95fr) minmax(28rem, 1.05fr);
+}
+
+.poster {
+  display: grid;
+  padding: clamp(1rem, 1.8vw, 1.75rem);
+  background: #efefed;
+  gap: clamp(1rem, 1.8vw, 1.75rem);
+  grid-template-columns: clamp(6.5rem, 9vw, 9.5rem) minmax(0, 1fr);
+}
+
+.brandRail {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.companyTitle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin: 0;
+  color: #000;
+  font-family: var(--font-display);
+  font-size: clamp(4.75rem, 8vw, 8.75rem);
+  font-weight: 700;
+  letter-spacing: -0.075em;
+  line-height: 0.78;
+  text-transform: uppercase;
+  transform: translateX(-50%) rotate(-90deg);
+  transform-origin: center;
+  white-space: nowrap;
+}
+
+.posterBody {
+  min-width: 0;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 0.72;
+  background: #000;
+  overflow: hidden;
+}
+
+.media::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 20%) 0%, transparent 45%, rgb(0 0 0 / 16%) 100%);
+  content: '';
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 380ms var(--ease-editorial);
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(1) contrast(1.08);
+  object-fit: cover;
+  object-position: center 62%;
+  transition:
+    filter 500ms var(--ease-editorial),
+    transform 650ms var(--ease-editorial);
+}
+
+.poster:hover .media::after {
+  opacity: 0.35;
+}
+
+.poster:hover .media img {
+  filter: grayscale(0.65) contrast(1.08);
+  transform: scale(1.02);
+}
+
+.roleLabel,
+.dateLabel {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.roleLabel {
+  top: clamp(1.25rem, 3vw, 2.5rem);
+  right: 0;
+  left: clamp(1.25rem, 3vw, 2.5rem);
+  width: fit-content;
+  max-width: calc(100% - clamp(2.5rem, 6vw, 5rem));
+  padding: clamp(0.65rem, 1.2vw, 1rem);
+  background: #fff;
+  color: #000;
+  font-size: clamp(1.35rem, 2.1vw, 2.5rem);
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.dateLabel {
+  top: clamp(7.5rem, 12vw, 11rem);
+  left: clamp(1.25rem, 3vw, 2.5rem);
+  color: #fff;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.posterFooter {
+  display: flex;
+  padding: clamp(1.5rem, 3vw, 2.75rem) 0 clamp(0.5rem, 1vw, 1rem);
+  color: #000;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.posterFooter strong {
+  margin-bottom: 0.25rem;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.posterFooter span {
+  font-size: clamp(0.7rem, 0.85vw, 0.825rem);
+  line-height: 1.4;
+}
+
+.responsibilities {
+  min-width: 0;
+  padding-top: clamp(0.5rem, 1.5vw, 1.5rem);
+}
+
+.listLabel {
+  margin: 0 0 clamp(1.5rem, 3vw, 2.75rem);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bulletList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.bulletList li {
+  position: relative;
+  padding: 0 0 clamp(1.25rem, 2.25vw, 2rem) clamp(1.5rem, 2.5vw, 2.25rem);
+  color: #000;
+  font-size: clamp(0.875rem, 1.05vw, 1.05rem);
+  line-height: 1.6;
+}
+
+.bulletList li::before {
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #000;
+  content: '';
+}
+
+@media (max-width: 74rem) {
+  .experienceGrid {
+    gap: clamp(2rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(27rem, 0.9fr) minmax(22rem, 1.1fr);
+  }
+
+  .poster {
+    grid-template-columns: clamp(5rem, 8vw, 7rem) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 55rem) {
+  .section {
+    min-height: auto;
+    padding: calc(var(--header-height) + 4rem) 1rem 4rem;
+  }
+
+  .experienceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .poster {
+    grid-template-columns: clamp(5rem, 20vw, 8rem) minmax(0, 1fr);
+  }
+
+  .companyTitle {
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .responsibilities {
+    padding-top: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media::after,
+  .media img {
+    transition-duration: 1ms;
+  }
+}

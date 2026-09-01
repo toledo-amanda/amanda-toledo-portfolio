@@ -1,0 +1,228 @@
+.hero {
+  min-height: calc(100svh - var(--header-height));
+  background: var(--color-background);
+  scroll-snap-align: start;
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+  min-height: calc(100svh - var(--header-height));
+  background: var(--color-background);
+  overflow: hidden;
+}
+
+.contentPanel {
+  position: absolute;
+  z-index: 3;
+  top: var(--page-gutter);
+  right: var(--page-gutter);
+  bottom: var(--page-gutter);
+  width: clamp(34rem, 42vw, 44rem);
+  min-width: 0;
+  border: 1px solid var(--color-ink);
+  background: var(--color-paper);
+}
+
+.contentPanel::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-soft-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-soft-line) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  content: '';
+  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 28%), transparent 32%);
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: clamp(34rem, 42vw, 44rem);
+  height: 100%;
+  min-height: 100%;
+  justify-content: center;
+  padding: clamp(4.5rem, 8vh, 7rem) clamp(1.5rem, 3.6vw, 4.5rem) 2rem;
+  flex-direction: column;
+  overflow-y: auto;
+  transform-origin: left center;
+}
+
+.heroContent h1 {
+  max-width: 8.4em;
+  margin: 0;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.25vw, 6.8rem);
+  font-weight: 400;
+  letter-spacing: -0.07em;
+  line-height: 0.88;
+  text-wrap: balance;
+}
+
+.role {
+  width: fit-content;
+  margin: clamp(1rem, 2.5vh, 1.75rem) 0 0;
+  padding: 20px;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.summary {
+  max-width: 42rem;
+  margin: clamp(1.25rem, 2.5vh, 2rem) 0 0;
+  color: var(--color-graphite);
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 3.5vh, 2.75rem);
+  flex-wrap: wrap;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  min-height: 2.875rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-ink);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+
+.primaryAction {
+  gap: 1rem;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.primaryAction svg {
+  width: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+}
+
+.primaryAction:hover {
+  background: var(--color-paper);
+  border-color: var(--color-ink);
+  box-shadow: inset 0 -3px var(--color-ink);
+}
+
+.secondaryAction:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: inset 0 -3px var(--color-ink);
+}
+
+.metrics {
+  display: grid;
+  max-width: 40rem;
+  padding-top: clamp(1.5rem, 4vh, 3.25rem);
+  margin-top: auto;
+  border-top: 1px solid var(--color-line);
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 74rem) {
+  .contentPanel,
+  .heroContent {
+    width: clamp(30rem, 48vw, 38rem);
+  }
+
+  .heroContent h1 {
+    font-size: clamp(2.8rem, 5.4vw, 5rem);
+  }
+
+  .metrics {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .hero {
+    min-height: auto;
+  }
+
+  .canvas {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .contentPanel {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: 100% !important;
+    min-height: calc(100svh - var(--header-height) - 2rem);
+    margin-left: auto;
+  }
+
+  .heroContent {
+    width: 100%;
+    min-height: calc(100svh - var(--header-height) - 2rem);
+    padding: clamp(3rem, 8vh, 5rem) 1.25rem 1.5rem;
+    overflow-y: visible;
+  }
+
+  .heroContent h1 {
+    font-size: clamp(3.1rem, 15vw, 5.5rem);
+  }
+
+  .summary {
+    font-size: 0.95rem;
+  }
+
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+
+  .metrics {
+    padding-top: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+}
+
+@media (max-width: 25rem) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction {
+    transition-duration: 1ms;
+  }
+}
